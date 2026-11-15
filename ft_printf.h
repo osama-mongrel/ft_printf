@@ -1,8 +1,9 @@
 #ifndef FT_PRINTF_H
-# define FT_PTRINTF_H
+# define FT_PRINTF_H
 
 # include <stdarg.h>
-# include "libft/libft.h"
+# include <unistd.h>
+# include "libft.h"
 
 # define FORMATS "cspdiuxX%"
 # define DECIMAL "0123456789"
