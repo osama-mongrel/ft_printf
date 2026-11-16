@@ -11,5 +11,10 @@
 # define HEX_UP "0123456789ABCDEF"
 
 int	ft_printf(const char *, ...);
+int	printf_format(char, va_list);
+int	print_nbr(long, char *);
+int	print_str(char *);
+int	print_char(int c);
+int	print_ptr(unsigned long);
 
 #endif

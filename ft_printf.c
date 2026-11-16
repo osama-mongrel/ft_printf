@@ -32,6 +32,26 @@ int print_nbr(long n, char *base)
 	return (count + print_char(base[n % base_len]));
 }
 
+int	print_ptr(unsigned long ptr)
+{
+	int				count;
+	char			*base;
+	static int		init;
+
+	count = 0;
+	base = HEX_LOW;
+	if (!init)
+	{
+		count += print_str("0x");
+		init = 1;
+	}
+	if (!ptr)
+		return (print_str("(nil)"));
+	if (ptr > 16)
+		count += print_ptr(ptr / 16);
+	return (count + print_char(base[ptr % 16]));
+}
+
 int	print_format(char spec, va_list ap)
 {
 	int				count;
@@ -41,8 +61,8 @@ int	print_format(char spec, va_list ap)
 		count += print_char(va_arg(ap, int));
 	else if (spec == 's')
 		count += print_str(va_arg(ap, char *));
-/*	else if (spec == 'p')
-		count += print_ptr(va_arg(ap, void *));*/
+	else if (spec == 'p')
+		count += print_ptr((unsigned long)va_arg(ap, void *));
 	else if (spec == 'd' || spec == 'i')
 		count += print_nbr(va_arg(ap, int), DECIMAL);
 	else if (spec == 'u')
